@@ -4,14 +4,15 @@ import java.util.StringJoiner;
 
 public class Curso extends Conteudo {
 
-    private int cargaHoraria;
+    private final int cargaHoraria;
 
-    public Curso(String titulo, String descricao) {
+    public Curso(String titulo, String descricao, int cargaHoraria) {
         super(titulo, descricao);
+        this.cargaHoraria = cargaHoraria;
     }
 
     @Override
-    public double calcularXp() {
+    public Double getXp() {
         return XP_PADRAO * cargaHoraria;
     }
 
@@ -23,6 +24,7 @@ public class Curso extends Conteudo {
     public String toString() {
         return new StringJoiner(", ", Curso.class.getSimpleName() + "[", "]")
                 .add("cargaHoraria=" + cargaHoraria)
+                .add("xp=" + getXp())
                 .add("titulo='" + getTitulo() + "'")
                 .add("descricao='" + getDescricao() + "'")
                 .toString();

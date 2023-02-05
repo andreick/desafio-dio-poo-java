@@ -14,16 +14,16 @@ public abstract class Conteudo {
         this.descricao = descricao;
     }
 
-    public double calcularXp() {
-        return XP_PADRAO;
-    }
-
     public String getTitulo() {
         return titulo;
     }
 
     public String getDescricao() {
         return descricao;
+    }
+
+    public Double getXp() {
+        return XP_PADRAO;
     }
 
     @Override

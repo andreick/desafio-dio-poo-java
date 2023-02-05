@@ -7,14 +7,15 @@ public class Mentoria extends Conteudo {
 
     private static final double XP_PADRAO = Conteudo.XP_PADRAO + 20.0;
 
-    private LocalDate data;
+    private final LocalDate data;
 
-    public Mentoria(String titulo, String descricao) {
+    public Mentoria(String titulo, String descricao, LocalDate data) {
         super(titulo, descricao);
+        this.data = data;
     }
 
     @Override
-    public double calcularXp() {
+    public Double getXp() {
         return XP_PADRAO;
     }
 
@@ -26,6 +27,7 @@ public class Mentoria extends Conteudo {
     public String toString() {
         return new StringJoiner(", ", Mentoria.class.getSimpleName() + "[", "]")
                 .add("data=" + data)
+                .add("xp=" + getXp())
                 .add("titulo='" + getTitulo() + "'")
                 .add("descricao='" + getDescricao() + "'")
                 .toString();
