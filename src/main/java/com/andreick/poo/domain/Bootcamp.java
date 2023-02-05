@@ -19,17 +19,12 @@ public class Bootcamp {
         this.descricao = descricao;
     }
 
+    public void adicionarConteudo(Conteudo conteudo) {
+        conteudos.add(conteudo);
+    }
+
     public void inscrever(Dev dev) {
         devsInscritos.add(dev);
-        dev.inscrever(conteudos);
-    }
-
-    public LocalDate getDataInicial() {
-        return dataInicial;
-    }
-
-    public LocalDate getDataFinal() {
-        return dataFinal;
     }
 
     public String getNome() {
@@ -38,6 +33,14 @@ public class Bootcamp {
 
     public String getDescricao() {
         return descricao;
+    }
+
+    public LocalDate getDataInicial() {
+        return dataInicial;
+    }
+
+    public LocalDate getDataFinal() {
+        return dataFinal;
     }
 
     public Set<Dev> getDevsInscritos() {

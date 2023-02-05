@@ -12,24 +12,13 @@ public class Dev {
         this.nome = nome;
     }
 
-    public void inscrever(Bootcamp bootcamp) {
-        bootcamp.inscrever(this);
-    }
-
-    public void inscrever(Set<Conteudo> conteudos) {
+    public void inscrever(Collection<Conteudo> conteudos) {
         conteudosInscritos.addAll(conteudos);
     }
 
-    public void progredir() {
-        Optional<Conteudo> optConteudo = conteudosInscritos.stream().findFirst();
-        optConteudo.ifPresentOrElse(conteudo -> {
-            conteudosConcluidos.add(conteudo);
-            conteudosInscritos.remove(conteudo);
-        }, () -> System.err.println("Dev sem cursos inscritos"));
-    }
-
-    public Double calcularXp() {
-        return conteudosConcluidos.stream().mapToDouble(Conteudo::getXp).sum();
+    public void concluir(Conteudo conteudo) {
+        conteudosConcluidos.add(conteudo);
+        conteudosInscritos.remove(conteudo);
     }
 
     public String getNome() {
@@ -61,7 +50,6 @@ public class Dev {
     public String toString() {
         return new StringJoiner(", ", Dev.class.getSimpleName() + "[", "]")
                 .add("nome='" + nome + "'")
-                .add("xp=" + calcularXp())
                 .toString();
     }
 }
