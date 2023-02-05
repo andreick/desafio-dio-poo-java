@@ -1,5 +1,7 @@
 package com.andreick.poo.domain;
 
+import java.util.Objects;
+
 public abstract class Conteudo {
 
     protected static final double XP_PADRAO = 10.0;
@@ -22,5 +24,18 @@ public abstract class Conteudo {
 
     public String getDescricao() {
         return descricao;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Conteudo conteudo = (Conteudo) o;
+        return titulo.equals(conteudo.titulo);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(titulo);
     }
 }
