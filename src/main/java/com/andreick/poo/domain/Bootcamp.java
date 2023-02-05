@@ -1,9 +1,7 @@
 package com.andreick.poo.domain;
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.*;
 
 public class Bootcamp {
 
@@ -19,6 +17,11 @@ public class Bootcamp {
     public Bootcamp(String nome, String descricao) {
         this.nome = nome;
         this.descricao = descricao;
+    }
+
+    public void inscrever(Dev dev) {
+        devsInscritos.add(dev);
+        dev.inscrever(conteudos);
     }
 
     public LocalDate getDataInicial() {
@@ -38,10 +41,20 @@ public class Bootcamp {
     }
 
     public Set<Dev> getDevsInscritos() {
-        return devsInscritos;
+        return Collections.unmodifiableSet(devsInscritos);
     }
 
     public Set<Conteudo> getConteudos() {
-        return conteudos;
+        return Collections.unmodifiableSet(conteudos);
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", Bootcamp.class.getSimpleName() + "[", "]")
+                .add("nome='" + nome + "'")
+                .add("descricao='" + descricao + "'")
+                .add("dataInicial=" + dataInicial)
+                .add("dataFinal=" + dataFinal)
+                .toString();
     }
 }

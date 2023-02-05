@@ -1,8 +1,6 @@
 package com.andreick.poo.domain;
 
-import java.util.LinkedHashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 public class Dev {
 
@@ -14,16 +12,36 @@ public class Dev {
         this.nome = nome;
     }
 
+    public void inscrever(Bootcamp bootcamp) {
+        bootcamp.inscrever(this);
+    }
+
+    public void inscrever(Set<Conteudo> conteudos) {
+        conteudosInscritos.addAll(conteudos);
+    }
+
+    public void progredir() {
+        Optional<Conteudo> optConteudo = conteudosInscritos.stream().findFirst();
+        optConteudo.ifPresentOrElse(conteudo -> {
+            conteudosConcluidos.add(conteudo);
+            conteudosInscritos.remove(conteudo);
+        }, () -> System.err.println("Dev sem cursos inscritos"));
+    }
+
+    public Double calcularXp() {
+        return conteudosConcluidos.stream().mapToDouble(Conteudo::getXp).sum();
+    }
+
     public String getNome() {
         return nome;
     }
 
     public Set<Conteudo> getConteudosInscritos() {
-        return conteudosInscritos;
+        return Collections.unmodifiableSet(conteudosInscritos);
     }
 
     public Set<Conteudo> getConteudosConcluidos() {
-        return conteudosConcluidos;
+        return Collections.unmodifiableSet(conteudosConcluidos);
     }
 
     @Override
@@ -37,5 +55,13 @@ public class Dev {
     @Override
     public int hashCode() {
         return Objects.hash(nome);
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", Dev.class.getSimpleName() + "[", "]")
+                .add("nome='" + nome + "'")
+                .add("xp=" + calcularXp())
+                .toString();
     }
 }
