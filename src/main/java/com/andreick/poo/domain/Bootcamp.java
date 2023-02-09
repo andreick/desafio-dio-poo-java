@@ -23,6 +23,10 @@ public class Bootcamp {
         conteudos.add(conteudo);
     }
 
+    public void adicionarConteudos(Collection<Conteudo> conteudos) {
+        this.conteudos.addAll(conteudos);
+    }
+
     public void inscrever(Dev dev) {
         devsInscritos.add(dev);
     }
@@ -43,12 +47,12 @@ public class Bootcamp {
         return dataFinal;
     }
 
-    public Set<Dev> getDevsInscritos() {
-        return Collections.unmodifiableSet(devsInscritos);
+    public List<Dev> getDevsInscritos() {
+        return List.copyOf(devsInscritos);
     }
 
-    public Set<Conteudo> getConteudos() {
-        return Collections.unmodifiableSet(conteudos);
+    public List<Conteudo> getConteudos() {
+        return List.copyOf(conteudos);
     }
 
     @Override

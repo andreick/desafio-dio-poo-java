@@ -12,10 +12,11 @@ public class DevService {
         dev.inscrever(bootcamp.getConteudos());
     }
 
-    public void progredir(Dev dev) {
+    public Conteudo progredir(Dev dev) {
         var conteudo = dev.getConteudosInscritos().stream().findFirst()
                 .orElseThrow(() -> new DevException("Dev sem conteúdo para concluir"));
         dev.concluir(conteudo);
+        return conteudo;
     }
 
     public Double calcularTotalXp(Dev dev) {

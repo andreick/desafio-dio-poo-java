@@ -25,12 +25,12 @@ public class Dev {
         return nome;
     }
 
-    public Set<Conteudo> getConteudosInscritos() {
-        return Collections.unmodifiableSet(conteudosInscritos);
+    public List<Conteudo> getConteudosInscritos() {
+        return List.copyOf(conteudosInscritos);
     }
 
-    public Set<Conteudo> getConteudosConcluidos() {
-        return Collections.unmodifiableSet(conteudosConcluidos);
+    public List<Conteudo> getConteudosConcluidos() {
+        return List.copyOf(conteudosConcluidos);
     }
 
     @Override
