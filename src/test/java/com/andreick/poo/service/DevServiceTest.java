@@ -3,6 +3,7 @@ package com.andreick.poo.service;
 import com.andreick.poo.domain.*;
 import com.andreick.poo.exception.DevException;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -35,7 +36,8 @@ public class DevServiceTest {
     }
 
     @Test
-    public void O_Dev_Se_Inscreve_Em_Um_Bootcamp() {
+    @DisplayName("O Dev se inscreve em um Bootcamp")
+    public void inscricaoBootcamp_Sucesso() {
 
         devService.inscreverBootcamp(dev, bootcamp);
 
@@ -46,7 +48,8 @@ public class DevServiceTest {
     }
 
     @Test
-    public void O_Dev_Conclui_Os_Conteudos_Na_Ordem_De_Inscricao() {
+    @DisplayName("O Dev conclui os conteúdos na ordem de inscrição")
+    public void ordemConclusaoConteudos_Sucesso() {
 
         devService.inscreverBootcamp(dev, bootcamp);
 
@@ -54,13 +57,15 @@ public class DevServiceTest {
     }
 
     @Test
-    public void O_Dev_Nao_Pode_Concluir_Um_Conteudo_Se_Nao_Estiver_Inscrito_Em_Nenhum() {
+    @DisplayName("O Dev não pode concluir um conteúdo se não estiver inscrito em nenhum")
+    public void conclusaoSemConteudos_Exception() {
 
         assertThrows(DevException.class, () -> devService.progredir(dev));
     }
 
     @Test
-    public void O_XP_Do_Dev_Eh_A_Soma_Do_XP_Dos_Seus_Conteudos_Concluidos() {
+    @DisplayName("O XP do Dev é a soma do XP dos seus conteúdos concluídos")
+    public void calculoXP_Sucesso() {
 
         double xpTotal = devService.calcularTotalXp(dev);
 
