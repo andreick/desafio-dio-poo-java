@@ -21,6 +21,14 @@ public class Dev {
         conteudosInscritos.remove(conteudo);
     }
 
+    public Optional<Conteudo> getPrimeiroConteudoInscrito() {
+        return conteudosInscritos.stream().findFirst();
+    }
+
+    public Double getTotalXpConteudosConcluidos() {
+        return conteudosConcluidos.stream().mapToDouble(Conteudo::getXp).sum();
+    }
+
     public String getNome() {
         return nome;
     }

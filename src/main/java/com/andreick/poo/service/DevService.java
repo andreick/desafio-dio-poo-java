@@ -13,13 +13,13 @@ public class DevService {
     }
 
     public Conteudo progredir(Dev dev) {
-        var conteudo = dev.getConteudosInscritos().stream().findFirst()
+        var conteudo = dev.getPrimeiroConteudoInscrito()
                 .orElseThrow(() -> new DevException("Dev sem conteúdo para concluir"));
         dev.concluir(conteudo);
         return conteudo;
     }
 
     public Double calcularTotalXp(Dev dev) {
-        return dev.getConteudosConcluidos().stream().mapToDouble(Conteudo::getXp).sum();
+        return dev.getTotalXpConteudosConcluidos();
     }
 }
