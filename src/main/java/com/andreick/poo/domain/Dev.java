@@ -1,5 +1,7 @@
 package com.andreick.poo.domain;
 
+import com.andreick.poo.exception.DevException;
+
 import java.util.*;
 
 public class Dev {
@@ -12,21 +14,25 @@ public class Dev {
         this.nome = nome;
     }
 
-    public void inscrever(Collection<Conteudo> conteudos) {
-        conteudosInscritos.addAll(conteudos);
+    public void inscreverBootcamp(Bootcamp bootcamp) {
+        conteudosInscritos.addAll(bootcamp.getConteudos());
+        bootcamp.inscrever(this);
     }
 
-    public void concluir(Conteudo conteudo) {
+    public Conteudo progredir() {
+        var conteudo = conteudosInscritos.stream().findFirst()
+                .orElseThrow(() -> new DevException("Dev sem conteúdo para concluir"));
+        concluir(conteudo);
+        return conteudo;
+    }
+
+    public Double calcularTotalXp() {
+        return conteudosConcluidos.stream().mapToDouble(Conteudo::getXp).sum();
+    }
+
+    private void concluir(Conteudo conteudo) {
         conteudosConcluidos.add(conteudo);
         conteudosInscritos.remove(conteudo);
-    }
-
-    public Optional<Conteudo> getPrimeiroConteudoInscrito() {
-        return conteudosInscritos.stream().findFirst();
-    }
-
-    public Double getTotalXpConteudosConcluidos() {
-        return conteudosConcluidos.stream().mapToDouble(Conteudo::getXp).sum();
     }
 
     public String getNome() {

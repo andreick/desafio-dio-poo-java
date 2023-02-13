@@ -1,6 +1,5 @@
-package com.andreick.poo.service;
+package com.andreick.poo.domain;
 
-import com.andreick.poo.domain.*;
 import com.andreick.poo.exception.DevException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -11,17 +10,14 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class DevServiceTest {
+public class DevTest {
 
-    private DevService devService;
     private Dev dev;
     private Bootcamp bootcamp;
     private List<Conteudo> conteudos;
 
     @BeforeEach
     public void iniciar() {
-
-        devService = new DevService();
 
         conteudos = List.of(
                 new Curso("curso js", "descrição curso js", 4),
@@ -39,7 +35,7 @@ public class DevServiceTest {
     @DisplayName("O Dev se inscreve em um Bootcamp")
     public void inscricaoBootcamp_Sucesso() {
 
-        devService.inscreverBootcamp(dev, bootcamp);
+        dev.inscreverBootcamp(bootcamp);
 
         assertAll(
                 () -> assertEquals(List.of(dev), bootcamp.getDevsInscritos(), "O Dev não foi inscrito no Bootcamp"),
@@ -51,33 +47,33 @@ public class DevServiceTest {
     @DisplayName("O Dev conclui os conteúdos na ordem de inscrição")
     public void ordemConclusaoConteudos_Sucesso() {
 
-        devService.inscreverBootcamp(dev, bootcamp);
+        dev.inscreverBootcamp(bootcamp);
 
-        conteudos.forEach(conteudo -> assertEquals(conteudo, devService.progredir(dev), "Conteúdo concluido na ordem incorreta"));
+        conteudos.forEach(conteudo -> assertEquals(conteudo, dev.progredir(), "Conteúdo concluido na ordem incorreta"));
     }
 
     @Test
     @DisplayName("O Dev não pode concluir um conteúdo se não estiver inscrito em nenhum")
     public void conclusaoSemConteudos_Exception() {
 
-        assertThrows(DevException.class, () -> devService.progredir(dev));
+        assertThrows(DevException.class, () -> dev.progredir());
     }
 
     @Test
     @DisplayName("O XP do Dev é a soma do XP dos seus conteúdos concluídos")
     public void calculoXP_Sucesso() {
 
-        double xpTotal = devService.calcularTotalXp(dev);
+        double xpTotal = dev.calcularTotalXp();
 
-        devService.inscreverBootcamp(dev, bootcamp);
+        dev.inscreverBootcamp(bootcamp);
 
         int quantidadeConteudos = dev.getConteudosInscritos().size();
 
         for (int i = 0; i < quantidadeConteudos; i++) {
-            var conteudo = devService.progredir(dev);
+            var conteudo = dev.progredir();
             xpTotal += conteudo.getXp();
         }
 
-        assertEquals(xpTotal, devService.calcularTotalXp(dev));
+        assertEquals(xpTotal, dev.calcularTotalXp());
     }
 }

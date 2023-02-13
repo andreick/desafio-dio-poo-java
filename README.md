@@ -5,8 +5,8 @@ O objetivo é abstrair o domínio de aplicação de um Bootcamp. Cada Bootcamp p
 
 ## O que foi feito
 
-Em relação ao projeto de demonstração do desafio, este projeto faz uma separação mais clara das regras de nogócio encapsulando as classes de acesso aos dados, a classe [DevService](src/main/java/com/andreick/poo/service/DevService.java) contém as regras de negócio relativas ao Dev.  
-Também foi criada a classe [DevServiceTest](src/test/java/com/andreick/poo/service/DevServiceTest.java) para testar os comportamentos esperados.
+Em relação ao projeto de demonstração do desafio, este projeto usa alguns métodos que melhoram o encapsulamento das classes.  
+Também foi criada a classe [DevTest](src/test/java/com/andreick/poo/domain/DevTest.java) para testar os comportamentos esperados.
 
 ## O que foi utilizado
 
